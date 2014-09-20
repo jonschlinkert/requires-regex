@@ -1,7 +1,7 @@
 # requires-regex [![NPM version](https://badge.fury.io/js/requires-regex.svg)](http://badge.fury.io/js/requires-regex)
 
 
-> Regular expressions for node.js require statements.
+> Regular expressions for matching node.js require statements.
 
 ## Install
 #### Install with [npm](npmjs.org)

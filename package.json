@@ -1,6 +1,6 @@
 {
   "name": "requires-regex",
-  "description": "Regular expressions for node.js require statements.",
+  "description": "Regular expressions for matching node.js require statements.",
   "version": "0.1.1",
   "homepage": "https://github.com/jonschlinkert/requires-regex",
   "author": {
