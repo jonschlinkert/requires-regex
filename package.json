@@ -1,0 +1,64 @@
+{
+  "name": "requires-regex",
+  "description": "Regular expressions for node.js require statements.",
+  "version": "0.1.1",
+  "homepage": "https://github.com/jonschlinkert/requires-regex",
+  "author": {
+    "name": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jonschlinkert/requires-regex.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/requires-regex/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jonschlinkert/requires-regex/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "^4.0.4",
+    "verb": ">= 0.2.6",
+    "verb-tag-jscomments": ">= 0.2.0"
+  },
+  "keywords": [
+    "analyze",
+    "ast",
+    "code",
+    "exec",
+    "exports",
+    "expression",
+    "expressions",
+    "find",
+    "local",
+    "match",
+    "matcher",
+    "matches",
+    "matching",
+    "module",
+    "modules",
+    "path",
+    "paths",
+    "re",
+    "regex",
+    "regexp",
+    "regular",
+    "require",
+    "requires",
+    "source",
+    "statement",
+    "test"
+  ]
+}
