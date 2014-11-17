@@ -1,7 +1,7 @@
 {
   "name": "requires-regex",
   "description": "Regular expressions for matching node.js require statements.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/jonschlinkert/requires-regex",
   "author": {
     "name": "Jon Schlinkert",
@@ -29,9 +29,7 @@
   },
   "devDependencies": {
     "mocha": "*",
-    "should": "^4.0.4",
-    "verb": ">= 0.2.6",
-    "verb-tag-jscomments": ">= 0.2.0"
+    "should": "^4.0.4"
   },
   "keywords": [
     "analyze",
