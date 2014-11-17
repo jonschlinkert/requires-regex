@@ -7,5 +7,5 @@
  */
 
 module.exports = function () {
-  return /^(var[ \t]*([\w$]+)[ \t]*=[ \t]*)?require\(['"]([\w\W]+?)['"]\)/gm;
+  return /^[ \t]*(var[ \t]*([\w$]+)[ \t]*=[ \t]*)?require\(['"]([\w\W]+?)['"]\)/gm;
 };

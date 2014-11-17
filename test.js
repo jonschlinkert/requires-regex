@@ -27,4 +27,9 @@ describe('requires regex', function () {
     var m = 'var path = require(\'path\');\n\nvar list = require(\'dirs\');'.match(re());
     m.should.eql([ 'var path = require(\'path\')', 'var list = require(\'dirs\')' ]);
   });
+
+  it('should match indented variables', function () {
+    var m = '    var path = require(\'path\');\n\nvar list = require(\'dirs\');'.match(re());
+    m.should.eql([ '    var path = require(\'path\')', 'var list = require(\'dirs\')' ]);
+  });
 });
