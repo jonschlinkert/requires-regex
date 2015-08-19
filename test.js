@@ -7,29 +7,48 @@
 
 'use strict';
 
-var should = require('should');
+var assert = require('assert');
 var re = require('./');
+
+function match(str) {
+  var matches = [], m;
+  while (m = re().exec(str)) {
+    matches.push(m[2]);
+    str = str.slice(m.index + m[0].length);
+  }
+  return matches;
+}
 
 describe('requires regex', function () {
   it('should match require statements without a var', function () {
-    re().test('require(\'foo\');').should.be.true;
+    assert(re().test('require(\'foo\');'))
   });
 
-  it('should return the full statement, variable name, and module path', function () {
+  it('should return the full statement, variable name, and module name', function () {
     var m = re().exec('var isDir = require(\'is-directory\');');
-    m[0].should.equal('var isDir = require(\'is-directory\')');
-    m[1].should.equal('var isDir = ');
-    m[2].should.equal('isDir');
-    m[3].should.equal('is-directory');
+    assert.equal(m[0], 'var isDir = require(\'is-directory\')');
+    assert.equal(m[1], 'isDir');
+    assert.equal(m[2], 'is-directory');
   });
 
   it('should return an array of matches', function () {
-    var m = 'var path = require(\'path\');\n\nvar list = require(\'dirs\');'.match(re());
-    m.should.eql([ 'var path = require(\'path\')', 'var list = require(\'dirs\')' ]);
+    var str = 'var path = require(\'path\')var list = require(\'dirs\');'
+    assert.deepEqual(match(str), ['path', 'dirs']);
+    assert.deepEqual(match('require(\'path\')\nrequire(\'dirs\');'), ['path', 'dirs']);
+    assert.deepEqual(match('require("path")\nrequire("dirs");'), ['path', 'dirs']);
+    assert.deepEqual(match('require("path")require("dirs");'), ['path', 'dirs']);
+    assert.deepEqual(match('var foo = require("path")require("dirs");'), ['path', 'dirs']);
+    assert.deepEqual(match('var\nfoo\n=\nrequire("path")require("dirs");'), ['path', 'dirs']);
+    assert.deepEqual(match('var foo = require("path")require("dirs")'), ['path', 'dirs']);
+    assert.deepEqual(match('foo = require("path")require("dirs")'), ['path', 'dirs']);
+    assert.deepEqual(match('foo = require("path")bar = require("dirs")'), ['path', 'dirs']);
+    assert.deepEqual(match('foo = require("a-b")bar = require("c-d-e")'), ['a-b', 'c-d-e']);
+    assert.deepEqual(match('foo = require("./path")bar = require("./dirs")'), ['./path', './dirs']);
+    assert.deepEqual(match('const foo = require("./path")bar = require("./dirs")'), ['./path', './dirs']);
   });
 
   it('should match indented variables', function () {
-    var m = '    var path = require(\'path\');\n\nvar list = require(\'dirs\');'.match(re());
-    m.should.eql([ '    var path = require(\'path\')', 'var list = require(\'dirs\')' ]);
+    var str = '    var path = require(\'path\');\n\nvar list = require(\'dirs\');';
+    assert.deepEqual(match(str),['path', 'dirs']);
   });
 });
