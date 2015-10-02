@@ -1,7 +1,7 @@
 {
   "name": "requires-regex",
   "description": "Regular expression for matching javascript require statements.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/jonschlinkert/requires-regex",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/requires-regex",
