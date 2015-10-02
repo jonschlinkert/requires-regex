@@ -5,5 +5,5 @@
  */
 
 module.exports = function () {
-  return /(?:(?:var|const)\s*([\w$]+)\s*=\s*)?require\(['"]([^'"]+)['"]\)/;
+  return /(?:(?:var|const)\s*([\w$]+)\s*=\s*)?require\(['"]([^'"]+)['"]\);?/;
 };
