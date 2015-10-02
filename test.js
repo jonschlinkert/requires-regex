@@ -22,13 +22,19 @@ function match(str) {
 describe('requires regex', function () {
   it('should match require statements without a var', function () {
     assert(re().test('require(\'foo\');'))
+    assert(re().test('require(\'foo\')'))
   });
 
   it('should return the full statement, variable name, and module name', function () {
-    var m = re().exec('var isDir = require(\'is-directory\');');
-    assert.equal(m[0], 'var isDir = require(\'is-directory\')');
-    assert.equal(m[1], 'isDir');
-    assert.equal(m[2], 'is-directory');
+    var a = re().exec('var isDir = require(\'is-directory\');');
+    assert.equal(a[0], 'var isDir = require(\'is-directory\');');
+    assert.equal(a[1], 'isDir');
+    assert.equal(a[2], 'is-directory');
+
+    var b = re().exec('var isDir = require(\'is-directory\')');
+    assert.equal(b[0], 'var isDir = require(\'is-directory\')');
+    assert.equal(b[1], 'isDir');
+    assert.equal(b[2], 'is-directory');
   });
 
   it('should return an array of matches', function () {
