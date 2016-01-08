@@ -46,9 +46,9 @@
   "verb": {
     "related": {
       "list": [
-        "regex-cache",
         "lint-deps",
-        "match-requires"
+        "match-requires",
+        "regex-cache"
       ]
     }
   }

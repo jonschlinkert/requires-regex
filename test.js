@@ -1,12 +1,13 @@
 /*!
  * requires-regex <https://github.com/jonschlinkert/requires-regex>
  *
- * Copyright (c) 2014 Jon Schlinkert, contributors.
+ * Copyright (c) 2014-2015 Jon Schlinkert, contributors.
  * Licensed under the MIT License
  */
 
 'use strict';
 
+require('mocha');
 var assert = require('assert');
 var re = require('./');
 
@@ -20,6 +21,11 @@ function match(str) {
 }
 
 describe('requires regex', function () {
+  it('should match require statements without a var', function () {
+    assert(re().test('require(\'foo\');'))
+    assert(re().test('require(\'foo\')'))
+  });
+
   it('should match require statements without a var', function () {
     assert(re().test('require(\'foo\');'))
     assert(re().test('require(\'foo\')'))
