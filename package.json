@@ -1,7 +1,7 @@
 {
   "name": "requires-regex",
   "description": "Regular expression for matching javascript require statements.",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "homepage": "https://github.com/jonschlinkert/requires-regex",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/requires-regex",
@@ -20,8 +20,7 @@
     "test": "mocha"
   },
   "devDependencies": {
-    "mocha": "*",
-    "should": "*"
+    "mocha": "*"
   },
   "keywords": [
     "exec",
@@ -50,6 +49,10 @@
         "match-requires",
         "regex-cache"
       ]
-    }
+    },
+    "layout": "default",
+    "plugins": [
+      "gulp-format-md"
+    ]
   }
 }
