@@ -20,18 +20,18 @@ function match(str) {
   return matches;
 }
 
-describe('requires regex', function () {
-  it('should match require statements without a var', function () {
+describe('requires regex', function() {
+  it('should match require statements without a var', function() {
     assert(re().test('require(\'foo\');'))
     assert(re().test('require(\'foo\')'))
   });
 
-  it('should match require statements without a var', function () {
-    assert(re().test('require(\'foo\');'))
-    assert(re().test('require(\'foo\')'))
+  it('should match require statements with multiple params', function() {
+    var m = re().exec('require("foo", "bar");');
+    assert(m);
   });
 
-  it('should return the full statement, variable name, and module name', function () {
+  it('should return the full statement, variable name, and module name', function() {
     var a = re().exec('var isDir = require(\'is-directory\');');
     assert.equal(a[0], 'var isDir = require(\'is-directory\');');
     assert.equal(a[1], 'isDir');
@@ -43,7 +43,7 @@ describe('requires regex', function () {
     assert.equal(b[2], 'is-directory');
   });
 
-  it('should return an array of matches', function () {
+  it('should return an array of matches', function() {
     var str = 'var path = require(\'path\')var list = require(\'dirs\');'
     assert.deepEqual(match(str), ['path', 'dirs']);
     assert.deepEqual(match('require(\'path\')\nrequire(\'dirs\');'), ['path', 'dirs']);
@@ -59,7 +59,7 @@ describe('requires regex', function () {
     assert.deepEqual(match('const foo = require("./path")bar = require("./dirs")'), ['./path', './dirs']);
   });
 
-  it('should match indented variables', function () {
+  it('should match indented variables', function() {
     var str = '    var path = require(\'path\');\n\nvar list = require(\'dirs\');';
     assert.deepEqual(match(str),['path', 'dirs']);
   });
