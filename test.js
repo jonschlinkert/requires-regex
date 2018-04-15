@@ -17,7 +17,9 @@ function match(str) {
   var m;
   while ((m = regex.exec(str))) {
     if (!m[2] && !m[4]) continue;
-    matches.push({ [m[2] || m[4]]: m[4] });
+    var tok = {};
+    tok[m[2] || m[4]] = m[4];
+    matches.push(tok);
   }
   return matches;
 }
