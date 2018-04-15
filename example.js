@@ -1,5 +1,5 @@
-const regex = require('./')();
-const match = regex.exec('const foo = require(\'@bar/baz\');');
+const regex = require('./');
+const match = regex().exec('const foo = require(\'@bar/baz\');');
 console.log(match);
 // [ 'const foo = require(\'@bar/baz\');',
 //   undefined,
@@ -11,3 +11,5 @@ console.log(match);
 //   'baz',
 //   index: 0,
 //   input: 'const foo = require(\'@bar/baz\');' ]
+
+console.log(regex().exec('require(\'foo\', "whatever")'))

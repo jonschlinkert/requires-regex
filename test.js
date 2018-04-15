@@ -28,13 +28,36 @@ describe('requires regex', function() {
   it('should not match require statements in quotes', function() {
     assert.deepEqual(match('"require(\'foo\');"'), []);
     assert.deepEqual(match('"require(\'foo\')require(\'bar\');"'), []);
-    assert.deepEqual(match('"require(\'foo\')const foo = require(\'bar\');"'), []);
+    assert.deepEqual(match('"require("foo")const foo = require(\'bar\');"'), []);
+    assert.deepEqual(match('"require(\'foo\')const foo = require(\'bar\');"require("bar")'), [{bar: 'bar'}]);
+  });
+
+  it('should correctly detect the word "require" in statements in quoted strings', function() {
+    assert.deepEqual(match('"this is not a require statement"'), []);
+    assert.deepEqual(match('"this is not a require("") statement"'), []);
+    assert.deepEqual(match('"this is not a require() statement"'), []);
+  });
+
+  it('should detect require statements before and after quoted strings with "require"', function() {
+    assert.deepEqual(match('require("bar")"require(\'foo\');"require("baz")'), [{bar: 'bar'}, {baz: 'baz'}]);
+    assert.deepEqual(match('\nrequire("bar")"\nrequire(\'foo\');"\n\nrequire("baz")'), [{bar: 'bar'}, {baz: 'baz'}]);
+    assert.deepEqual(match('require("bar")"require(\'foo\');require(\'zzz\');"'), [{bar: 'bar'}]);
+    assert.deepEqual(match('require("bar")"require(\'foo\');"'), [{bar: 'bar'}]);
   });
 
   it('should match require statements with no leading characters', function() {
     assert.deepEqual(match("const one = require('two');"), [{ one: 'two' }]);
     assert.deepEqual(match("require('foo')"), [{ foo: 'foo' }]);
     assert.deepEqual(match('require("foo")'), [{ foo: 'foo' }]);
+    assert.deepEqual(match('require("./")'), [{ './': './' }]);
+  });
+
+  it('should work with backticks', function() {
+    assert.deepEqual(match("const one = require(`two`);"), [{ one: 'two' }]);
+    assert.deepEqual(match("\n\nrequire(`foo`);"), [{ foo: 'foo' }]);
+    assert.deepEqual(match("\nrequire(`foo`);\n\n"), [{ foo: 'foo' }]);
+    assert.deepEqual(match("require(`foo`);"), [{ foo: 'foo' }]);
+    assert.deepEqual(match('require(`foo`)'), [{ foo: 'foo' }]);
   });
 
   it('should match requires with leading whitespace and parens', function() {
