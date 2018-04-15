@@ -20,7 +20,8 @@
     "test": "mocha"
   },
   "devDependencies": {
-    "mocha": "*"
+    "gulp-format-md": "^1.0.0",
+    "mocha": "^3.5.3"
   },
   "keywords": [
     "exec",
@@ -43,6 +44,14 @@
     "test"
   ],
   "verb": {
+    "toc": false,
+    "layout": "default",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
     "related": {
       "list": [
         "lint-deps",
@@ -50,9 +59,8 @@
         "regex-cache"
       ]
     },
-    "layout": "default",
-    "plugins": [
-      "gulp-format-md"
-    ]
+    "lint": {
+      "reflinks": true
+    }
   }
 }
